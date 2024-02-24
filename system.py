@@ -1,10 +1,10 @@
 import subprocess
 import platform
 import os
+import time
 
 class System:
     def __init__(self):
-        # Limpa a tela do terminal
         self.clear_screen()
         self.username = input("What's your name? > ")
         self.base_directory = os.getcwd()
@@ -64,7 +64,7 @@ class System:
     def RunOS(self, username):
         print("================================")
         print("=                              =")
-        print("=  pythonOS 1.0 by jose icaro  =")
+        print("=  pythonOS 1.1 by jose icaro  =")
         print("=        made with love        =")
         print("=    98% me and 2% chatgpt     =")
         print("=                              =")
@@ -78,7 +78,7 @@ class System:
             elif command.startswith("vim"):
                 filename = command.split(" ")[1].strip("\"\'")
                 subprocess.run(f"vim {filename}", shell=True)
-            elif command.startswith("create"):
+            elif command.startswith("crte"):
                 typename = command.split(" --type ")[1].split(" ")[0].strip("\"\'")
                 itemname = command.split(" --name ")[1].strip("\"\'")
                 if typename.startswith("file"):
@@ -96,6 +96,10 @@ class System:
                 else:
                     print("Invalid target: file or folder does not exist.")
             elif command.startswith("shutdown"):
+                print("shutting down...")
+                time.sleep(2)
+                print("only one more second...")
+                time.sleep(1)
                 break
             elif command.startswith("start"):
                 app = command.split(" ")[1].strip("\"\'")
@@ -115,7 +119,7 @@ class System:
             elif command.startswith("help"):
                 print("print -s <message> -e                            : prints a message")
                 print("vim <filename>                                   : open a file using vim (only works if you have vim installed)")
-                print("create --type <typename> --name <itemname>       : creates a file or folder with the specified name")
+                print("crte --type <typename> --name <itemname>       : creates a file or folder with the specified name")
                 print("delete <target>                                  : deletes a file or folder")
                 print("cad <directory>                                  : change current working directory")
                 print("shutdown                                         : close the pythonOS")
@@ -125,6 +129,12 @@ class System:
                 print("dl                                               : directory list")
                 print("python -s <command, example: <filename> > -e     : executes python command")
                 print("pyinstall -s <libname> -e                        : downloads an python lib")
+                print("version                                          : shows the recent version")
+                print("uptime                                           : show system uptime")
+                print("diskusage                                        : show disk usage")
+                print("createpyfile --name <filename>                   : creates a Python file")
+                print("openfile <filename>                              : open a file in the default editor")
+                print("rename <oldname> <newname>                       : renames a file or folder")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -139,8 +149,60 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.0")
+                print("pythonOS by jose icaro. version: 1.1")
+            elif command.startswith("uptime"):
+                self.show_uptime()
+            elif command.startswith("diskusage"):
+                self.show_disk_usage()
+            elif command.startswith("createpyfile"):
+                filename = command.split(" --name ")[1].strip("\"\'")
+                self.create_python_file(filename)
+            elif command.startswith("openfile"):
+                filename = command.split(" ")[1].strip("\"\'")
+                self.open_file(filename)
+            elif command.startswith("rename"):
+                oldname = command.split(" ")[1].strip("\"\'")
+                newname = command.split(" ")[2].strip("\"\'")
+                self.rename(oldname, newname)
             else:
                 print(f"Err: command not found. {command}")
+
+    def show_uptime(self):
+        if platform.system() == "Windows":
+            output = subprocess.check_output("systeminfo | findstr /C:\"System Boot Time\"", shell=True).decode()
+            uptime = output.split(":")[1].strip()
+        else:
+            uptime = subprocess.check_output("uptime -p", shell=True).decode().strip()
+        print(f"System uptime: {uptime}")
+
+    def show_disk_usage(self):
+        if platform.system() == "Windows":
+            output = subprocess.check_output("wmic logicaldisk get size,freespace,caption", shell=True).decode()
+            print(output)
+        else:
+            output = subprocess.check_output("df -h", shell=True).decode()
+            print(output)
+
+    def create_python_file(self, filename):
+        if not filename.endswith(".py"):
+            filename += ".py"
+        subprocess.run(f"touch {filename}", shell=True)
+
+    def open_file(self, filename):
+        if platform.system() == "Windows":
+            os.startfile(filename)
+        elif platform.system() == "Darwin":
+            subprocess.run(["open", filename])
+        else:
+            subprocess.run(["xdg-open", filename])
+
+    def rename(self, oldname, newname):
+        try:
+            os.rename(oldname, newname)
+            print(f"{oldname} renamed to {newname}")
+        except FileNotFoundError:
+            print("File not found.")
+        except PermissionError:
+            print("Permission denied.")
 
 System()
