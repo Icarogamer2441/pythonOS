@@ -62,13 +62,13 @@ class System:
             subprocess.run(f"pip3 install {libname}", shell=True)
 
     def RunOS(self, username):
-        print("================================")
-        print("=                              =")
-        print("=  pythonOS 1.1 by jose icaro  =")
-        print("=        made with love        =")
-        print("=    98% me and 2% chatgpt     =")
-        print("=                              =")
-        print("================================")
+        print("+------------------------------+")
+        print("|                              |")
+        print("|  pythonOS 1.2 by jose icaro  |")
+        print("|        made with love        |")
+        print("|    98% me and 2% chatgpt     |")
+        print("|                              |")
+        print("+------------------------------+")
         while True:
             cwd = os.getcwd()
             command = input(f"\n{username}/pythonOS {cwd} >$ ")
@@ -100,6 +100,7 @@ class System:
                 time.sleep(2)
                 print("only one more second...")
                 time.sleep(1)
+                self.clear_screen()
                 break
             elif command.startswith("start"):
                 app = command.split(" ")[1].strip("\"\'")
@@ -119,7 +120,7 @@ class System:
             elif command.startswith("help"):
                 print("print -s <message> -e                            : prints a message")
                 print("vim <filename>                                   : open a file using vim (only works if you have vim installed)")
-                print("crte --type <typename> --name <itemname>       : creates a file or folder with the specified name")
+                print("crte --type <typename> --name <itemname>         : creates a file or folder with the specified name")
                 print("delete <target>                                  : deletes a file or folder")
                 print("cad <directory>                                  : change current working directory")
                 print("shutdown                                         : close the pythonOS")
@@ -135,6 +136,8 @@ class System:
                 print("createpyfile --name <filename>                   : creates a Python file")
                 print("openfile <filename>                              : open a file in the default editor")
                 print("rename <oldname> <newname>                       : renames a file or folder")
+                print("sc <filename>                                    : shows file content")
+                print("aptinstall -s <pkgname> -e                       : downloads pkgs to your computer using sudo apt install (only works with linux debian based)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -149,7 +152,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.1")
+                print("pythonOS by jose icaro. version: 1.2")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -164,8 +167,20 @@ class System:
                 oldname = command.split(" ")[1].strip("\"\'")
                 newname = command.split(" ")[2].strip("\"\'")
                 self.rename(oldname, newname)
+            elif command.startswith("sc"):
+                filename = command.split(" ")[1].strip("\"\'")
+                self.show_content(filename=filename)
+            elif command.startswith("aptinstall"):
+                pkgs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
+                subprocess.run("sudo apt install {pkgs}", shell=True)
             else:
                 print(f"Err: command not found. {command}")
+
+    def show_content(self, filename):
+        if platform.system == "Windows":
+            subprocess.run(f"type {filename}", shell=True)
+        else:
+            subprocess.run(f"cat {filename}", shell=True)
 
     def show_uptime(self):
         if platform.system() == "Windows":
