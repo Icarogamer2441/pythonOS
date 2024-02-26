@@ -2,11 +2,14 @@ import subprocess
 import platform
 import os
 import time
+from pytkinterui import Window
+import random
 
 class System:
     def __init__(self):
         self.clear_screen()
         self.username = input("What's your name? > ")
+        self.password = input("your new password > ")
         self.base_directory = os.getcwd()
         print(f"You're using your host system to work with the file system!\nCurrent working directory: {self.base_directory}")
         self.RunOS(self.username)
@@ -64,7 +67,7 @@ class System:
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.2 by jose icaro  |")
+        print("|  pythonOS 1.3 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -117,6 +120,26 @@ class System:
                 elif app.lower() == "-a":
                     print("Existing apps:")
                     print("1 - fakechat")
+                    print("2 - guesstnumber")
+                elif app.lower() == "guesstnumber":
+                    veripassword = input("what's your password? >$ ")
+                    if veripassword != self.password:
+                        print("password incorrect. try your real password!")
+                    else:
+                        self.clear_screen()
+                        print("correct password. now play!")
+                        print("try put 10+ numbers or 0- numbers to exit the game")
+                        while True:
+                            guessnumber = int(input("guess the number of 1 to 10 > "))
+                            self.clear_screen()
+                            number = random.randint(1,10)
+                            if guessnumber == number:
+                                print("correct number. play again!")
+                            elif guessnumber > 10 or guessnumber < 1:
+                                print("exiting the game")
+                                break
+                            else:
+                                print("incorrect number. play again!")
             elif command.startswith("help"):
                 print("print -s <message> -e                            : prints a message")
                 print("vim <filename>                                   : open a file using vim (only works if you have vim installed)")
@@ -138,6 +161,7 @@ class System:
                 print("rename <oldname> <newname>                       : renames a file or folder")
                 print("sc <filename>                                    : shows file content")
                 print("aptinstall -s <pkgname> -e                       : downloads pkgs to your computer using sudo apt install (only works with linux debian based)")
+                print("coy --filedir <filetocopy> --targetdir <targetofthecopiedfile> : copy an file")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -152,7 +176,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.2")
+                print("pythonOS by jose icaro. version: 1.3")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -173,8 +197,18 @@ class System:
             elif command.startswith("aptinstall"):
                 pkgs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 subprocess.run("sudo apt install {pkgs}", shell=True)
+            elif command.startswith("coy"):
+                file = command.split(" --filedir ")[1].split(" --targetdir ")[1].strip("\"\'")
+                targetdir = command.split(" --targetdir ")[1].strip("\"\'")
+                self.copy(file, targetdir)
             else:
                 print(f"Err: command not found. {command}")
+
+    def copy(self, filedir, targetdir):
+        if platform.system == "Windows":
+            subprocess.run(f"copy {filedir} {targetdir}")
+        else:
+            subprocess.run(f"cp {filedir} {targetdir}")
 
     def show_content(self, filename):
         if platform.system == "Windows":
