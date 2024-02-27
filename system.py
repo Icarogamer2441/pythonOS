@@ -2,7 +2,6 @@ import subprocess
 import platform
 import os
 import time
-from pytkinterui import Window
 import random
 
 class System:
