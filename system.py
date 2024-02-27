@@ -66,7 +66,7 @@ class System:
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.3 by jose icaro  |")
+        print("| pythonOS 1.3.5 by jose icaro |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -84,7 +84,10 @@ class System:
                 typename = command.split(" --type ")[1].split(" ")[0].strip("\"\'")
                 itemname = command.split(" --name ")[1].strip("\"\'")
                 if typename.startswith("file"):
-                    subprocess.run(f"touch {itemname}", shell=True) or subprocess.run(f'echo "" >> {itemname}', shell=True)
+                    if platform.system == "Windows":
+                        subprocess.run(f'echo "" >> {itemname}', shell=True)
+                    else:
+                        subprocess.run(f"touch {itemname}", shell=True)
                 elif typename.startswith("folder"):
                     subprocess.run(f"mkdir {itemname}", shell=True)
                 else:
@@ -175,7 +178,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.3")
+                print("pythonOS by jose icaro. version: 1.3.5")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
