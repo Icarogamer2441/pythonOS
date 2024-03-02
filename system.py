@@ -63,10 +63,27 @@ class System:
         else:
             subprocess.run(f"pip3 install {libname}", shell=True)
 
+    def date(self):
+        current_date = time.strftime("%Y-%m-%d", time.localtime())
+        print(f"Current date: {current_date}")
+
+    def calculator(self):
+        expression = input("Enter an expression: ")
+        try:
+            result = eval(expression)
+            print("Result:", result)
+        except Exception as e:
+            print("Error:", e)
+
+    def reminder(self):
+        reminder_text = input("Enter your reminder: ")
+        reminder_time = input("Enter reminder time (HH:MM): ")
+        print(f"Reminder set: {reminder_text} at {reminder_time}")
+
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.4 by jose icaro  |")
+        print("|  pythonOS 1.5 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -166,6 +183,10 @@ class System:
                 print("coy --filedir <filetocopy> --targetdir <targetofthecopiedfile> : copy an file")
                 print("author                                           : shows the pythonOS creator")
                 print("realcmd                                          : starts an venv on pythonOS that uses your real pc commands")
+                print("evig                                             : shows the terminal system version (linux is bash, pythonOS is named Evig)")
+                print("date                                             : Show the current date")
+                print("calculator                                       : Opens a simple calculator")
+                print("reminder                                         : Set a reminder for an event")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -180,7 +201,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.4")
+                print("pythonOS by jose icaro. version: 1.5")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -223,6 +244,16 @@ class System:
                             break
                         else:
                             subprocess.run(commands, shell=True)
+            elif command.startswith("evig"):
+                print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
+                print("version: 1.0")
+                print("release type: oficial release")
+            elif command.startswith("date"):
+                self.date()
+            elif command.startswith("calculator"):
+                self.calculator()
+            elif command.startswith("reminder"):
+                self.reminder()
             else:
                 print(f"Err: command not found. {command}")
 
