@@ -66,7 +66,7 @@ class System:
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("| pythonOS 1.3.5 by jose icaro |")
+        print("|  pythonOS 1.4 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -164,6 +164,8 @@ class System:
                 print("sc <filename>                                    : shows file content")
                 print("aptinstall -s <pkgname> -e                       : downloads pkgs to your computer using sudo apt install (only works with linux debian based)")
                 print("coy --filedir <filetocopy> --targetdir <targetofthecopiedfile> : copy an file")
+                print("author                                           : shows the pythonOS creator")
+                print("realcmd                                          : starts an venv on pythonOS that uses your real pc commands")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -178,7 +180,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.3.5")
+                print("pythonOS by jose icaro. version: 1.4")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -203,6 +205,24 @@ class System:
                 file = command.split(" --filedir ")[1].split(" --targetdir ")[1].strip("\"\'")
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
                 self.copy(file, targetdir)
+            elif command.startswith("author"):
+                print("josé icaro. github: icarogamer2441")
+            elif command.startswith("realcmd"):
+                veripassword = input("what's your password? ")
+                if veripassword != self.password:
+                    print("incorrect password! you need to use your real pythonOS password to use your real cmd with an venv inside pythonOS")
+                else:
+                    self.clear_screen()
+                    print("use 'shutvenvdown' to shutdown the venv but not your real pc")
+                    while True:
+                        commands = input(f"(realpcVenv) {self.username}/pythonOS {cwd} >$ ")
+                        if commands.lower() == "shutvenvdown":
+                            print("shutting down your venv")
+                            time.sleep(2)
+                            self.clear_screen()
+                            break
+                        else:
+                            subprocess.run(commands, shell=True)
             else:
                 print(f"Err: command not found. {command}")
 
