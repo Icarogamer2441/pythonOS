@@ -83,7 +83,7 @@ class System:
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.5 by jose icaro  |")
+        print("|  pythonOS 1.6 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -187,6 +187,9 @@ class System:
                 print("date                                             : Show the current date")
                 print("calculator                                       : Opens a simple calculator")
                 print("reminder                                         : Set a reminder for an event")
+                print("osname                                           : shows the os name")
+                print("becreator                                        : shows an simple guide of be an pythonOS creator")
+                print("howtoversion                                     : shows an complete description of how to make your own pythonOS version (be an pythonOS creator)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -201,7 +204,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.5")
+                print("pythonOS by jose icaro. version: 1.6")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -246,7 +249,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.0")
+                print("version: 1.1")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -254,6 +257,26 @@ class System:
                 self.calculator()
             elif command.startswith("reminder"):
                 self.reminder()
+            elif command.startswith("osname"):
+                print("Operating System name: pythonOS")
+            elif command.startswith("becreator"):
+                print("if you want to be an pythonOS creator you can make your own version using the pythonOS code! please, use 'py' or 'os' on your pythonOS version name")
+            elif command.startswith("howtoversion"):
+                veripassword = input("what's your password? > ")
+                if veripassword != self.password:
+                    print("incorrect password! use your pythonOS password!")
+                else:
+                    print("do you really want to create your version? okay, here the tutorial:")
+                    print("learn python")
+                    print("see the pythonOS code and put all the commands inside of the 'System' class")
+                    print("inside system class, put an 'elif command.startswith('cmdname'):' on the RunOS function, after this, put your command function inside of the new 'elif'")
+                    print("save the file")
+                    print("if you want, add GUI to your pythonOS version (tkinter is super recommended to add gui)")
+                    print("add apps inside of the 'start' command if you want")
+                    print("costumize more and more your pythonOS version!")
+                    print("put the credits that you made the version, and the real pythonOS creator. me (josé icaro)")
+                    print("publish in github")
+                    print("enjoy your custom version!")
             else:
                 print(f"Err: command not found. {command}")
 
