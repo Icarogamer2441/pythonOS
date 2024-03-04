@@ -4,16 +4,21 @@ import os
 import time
 import random
 
-customcmds = {}
+
 
 class System:
     def __init__(self):
         self.clear_screen()
         self.username = input("What's your name? > ")
-        self.password = input("your new password > ")
+        self.password = input("your new password? > ")
         self.base_directory = os.getcwd()
+        self.customcmds = {} # dictionary to store custom commands
         print(f"You're using your host system to work with the file system!\nCurrent working directory: {self.base_directory}")
-        self.RunOS(self.username)
+        self.RunOS(self.username, self.password)
+        if self.relogin == True:
+            System()
+        else:
+            pass
     
     def clear_screen(self):
         if platform.system() == "Windows":
@@ -82,15 +87,16 @@ class System:
         reminder_time = input("Enter reminder time (HH:MM): ")
         print(f"Reminder set: {reminder_text} at {reminder_time}")
 
-    def RunOS(self, username):
+    def RunOS(self, username, password):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.7 by jose icaro  |")
+        print("|  pythonOS 1.8 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
         print("+------------------------------+")
         while True:
+            self.relogin = False
             cwd = os.getcwd()
             command = input(f"\n{username}/pythonOS {cwd} >$ ")
             if command.startswith("print"):
@@ -192,8 +198,12 @@ class System:
                 print("osname                                           : shows the os name")
                 print("becreator                                        : shows an simple guide of be an pythonOS creator")
                 print("howtoversion                                     : shows an complete description of how to make your own pythonOS version (be an pythonOS creator)")
-                print("cretecmd                                          : creates an custom command that you have to use an real cmd of your terminal")
+                print("cretecmd                                         : creates an custom command that you have to use an real cmd of your terminal")
                 print("execmd <customcmdname>                           : executes your custom cmd")
+                print("newterminal                                      : new terminal, but you dont need to login")
+                print("editcmd                                          : edits your custom command")
+                print("newloginterminal                                 : new terminal, but with login")
+                print("delallcmds                                       : delete all your custom commands")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -208,7 +218,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.7")
+                print("pythonOS by jose icaro. version: 1.8")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -253,7 +263,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.2")
+                print("version: 1.3")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -290,13 +300,35 @@ class System:
                     print("Warn! your custom command will not be saved forever! it will only work on this session.")
                     cmdname = input("command name (example: hello) > ")
                     executecmd = input('what command will execute? (example: echo "hello world!") > ')
-                    customcmds[cmdname] = executecmd
+                    self.customcmds[cmdname] = executecmd
             elif command.startswith("execmd"):
                 customcmd = command.split(" ")[1].strip("\"\'")
-                if customcmd in customcmds:
-                    os.system(customcmds[customcmd])
+                if customcmd in self.customcmds:
+                    os.system(self.customcmds[customcmd])
                 else:
                     print("Err: unknown custom command")
+            elif command.startswith("editcmd"):
+                veripassword = input("what's your password? > ")
+                if veripassword != self.password:
+                    print("Err: incorrect password")
+                else:
+                    newcmdname = input("what's your custom command? custom cmd name > ")
+                    newexecutecmd = input("and what should be the execution? > ")
+                    self.customcmds[newcmdname] = newexecutecmd
+            elif command.startswith("newterminal"):
+                self.clear_screen()
+                print("+------------------------------+")
+                print("|                              |")
+                print("|  pythonOS 1.8 by jose icaro  |")
+                print("|        made with love        |")
+                print("|    98% me and 2% chatgpt     |")
+                print("|                              |")
+                print("+------------------------------+")
+            elif command.startswith("newloginterminal"):
+                self.relogin = True
+                break
+            elif command.startswith("delallcmds"):
+                self.customcmds = {}
             else:
                 print(f"Err: command not found. {command}")
 
