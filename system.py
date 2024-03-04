@@ -4,7 +4,19 @@ import os
 import time
 import random
 
-
+class Bootloader:
+    def __init__(self):
+        self.clear_screen()
+        print("welcome to pythonloader, an custom pythonOS bootloader! customize if you're creating your own pythonOS version")
+        self.runos = input("do you want to run your pythonOS version? (y/n) > ")
+        if self.runos.lower() == "yes" or self.runos.lower() == "y":
+            System()
+    
+    def clear_screen(self):
+        if platform.system() == "Windows":
+            subprocess.run("cls", shell=True)
+        else:
+            subprocess.run("clear", shell=True)
 
 class System:
     def __init__(self):
@@ -90,7 +102,7 @@ class System:
     def RunOS(self, username, password):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.8 by jose icaro  |")
+        print("|  pythonOS 1.9 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -148,6 +160,7 @@ class System:
                     print("Existing apps:")
                     print("1 - fakechat")
                     print("2 - guesstnumber")
+                    print("3 - createpyosver")
                 elif app.lower() == "guesstnumber":
                     veripassword = input("what's your password? >$ ")
                     if veripassword != self.password:
@@ -167,6 +180,18 @@ class System:
                                 break
                             else:
                                 print("incorrect number. play again!")
+                elif app.lower() == "createpyosver":
+                    vername = input("Enter an custom name to your pythonOS version > ")
+                    with open(f"{vername}.py", "w") as file1:
+                        with open("system.py", "r") as file2:
+                            sourcecode = file2.read()
+                        file1.write(sourcecode)
+                    print("pythonOS custom version file created!")
+                    editfile = input("do you want to edit the created file? (you need vim installed) (y/n) > ")
+                    if editfile.lower() == "yes" or editfile.lower() == "y":
+                        os.system('vim ' + f"{vername}.py")
+                    else:
+                        print("you now have the custom system file but you dont gonna edit. (you can edit with other file editor)")
             elif command.startswith("help"):
                 print("print -s <message> -e                            : prints a message")
                 print("vim <filename>                                   : open a file using vim (only works if you have vim installed)")
@@ -204,6 +229,7 @@ class System:
                 print("editcmd                                          : edits your custom command")
                 print("newloginterminal                                 : new terminal, but with login")
                 print("delallcmds                                       : delete all your custom commands")
+                print("addedthings                                      : see what features are added in this update")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -218,7 +244,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.8")
+                print("pythonOS by jose icaro. version: 1.9")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -263,7 +289,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.3")
+                print("version: 1.4")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -319,7 +345,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 1.8 by jose icaro  |")
+                print("|  pythonOS 1.9 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -329,6 +355,11 @@ class System:
                 break
             elif command.startswith("delallcmds"):
                 self.customcmds = {}
+            elif command.startswith("addedthings"):
+                print("apps:")
+                print("1 - createpyosver")
+                print("commands:")
+                print("1 - addedthings")
             else:
                 print(f"Err: command not found. {command}")
 
@@ -382,4 +413,4 @@ class System:
         except PermissionError:
             print("Permission denied.")
 
-System()
+Bootloader()
