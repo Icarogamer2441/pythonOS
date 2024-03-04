@@ -4,6 +4,8 @@ import os
 import time
 import random
 
+customcmds = {}
+
 class System:
     def __init__(self):
         self.clear_screen()
@@ -83,7 +85,7 @@ class System:
     def RunOS(self, username):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.6 by jose icaro  |")
+        print("|  pythonOS 1.7 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -190,6 +192,8 @@ class System:
                 print("osname                                           : shows the os name")
                 print("becreator                                        : shows an simple guide of be an pythonOS creator")
                 print("howtoversion                                     : shows an complete description of how to make your own pythonOS version (be an pythonOS creator)")
+                print("cretecmd                                          : creates an custom command that you have to use an real cmd of your terminal")
+                print("execmd <customcmdname>                           : executes your custom cmd")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -204,7 +208,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.6")
+                print("pythonOS by jose icaro. version: 1.7")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -249,7 +253,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.1")
+                print("version: 1.2")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -277,6 +281,22 @@ class System:
                     print("put the credits that you made the version, and the real pythonOS creator. me (josé icaro)")
                     print("publish in github")
                     print("enjoy your custom version!")
+            elif command.startswith("cretecmd"):
+                veripassword = input("you need your password to modify your OS! password: > ")
+                if veripassword != self.password:
+                    print("Err: incorrect password")
+                else:
+                    print("Warn! if you create an custom command, you need to use an real os command! (based on your OS)")
+                    print("Warn! your custom command will not be saved forever! it will only work on this session.")
+                    cmdname = input("command name (example: hello) > ")
+                    executecmd = input('what command will execute? (example: echo "hello world!") > ')
+                    customcmds[cmdname] = executecmd
+            elif command.startswith("execmd"):
+                customcmd = command.split(" ")[1].strip("\"\'")
+                if customcmd in customcmds:
+                    os.system(customcmds[customcmd])
+                else:
+                    print("Err: unknown custom command")
             else:
                 print(f"Err: command not found. {command}")
 
