@@ -102,7 +102,7 @@ class System:
     def RunOS(self, username, password):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 1.9 by jose icaro  |")
+        print("|  pythonOS 2.0 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -230,6 +230,7 @@ class System:
                 print("newloginterminal                                 : new terminal, but with login")
                 print("delallcmds                                       : delete all your custom commands")
                 print("addedthings                                      : see what features are added in this update")
+                print("developermode                                    : enters developer mode")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -244,7 +245,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 1.9")
+                print("pythonOS by jose icaro. version: 2.0")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -266,7 +267,7 @@ class System:
                 pkgs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 subprocess.run("sudo apt install {pkgs}", shell=True)
             elif command.startswith("coy"):
-                file = command.split(" --filedir ")[1].split(" --targetdir ")[1].strip("\"\'")
+                file = command.split(" --filedir ")[1].split(" --targetdir ")[0].strip("\"\'")
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
                 self.copy(file, targetdir)
             elif command.startswith("author"):
@@ -289,7 +290,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.4")
+                print("version: 1.5")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -345,7 +346,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 1.9 by jose icaro  |")
+                print("|  pythonOS 2.0 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -357,9 +358,43 @@ class System:
                 self.customcmds = {}
             elif command.startswith("addedthings"):
                 print("apps:")
-                print("1 - createpyosver")
                 print("commands:")
-                print("1 - addedthings")
+                print("1 - developermode")
+            elif command.startswith("developermode"):
+                print("you will only do programming inside developer mode")
+                enter = input("do you really want to start developer mode? (y/n) > ")
+                if enter.lower() == "y" or enter.lower() == "yes":
+                    while True:
+                        devcommand = input("help to see commands > ")
+                        if devcommand.lower() == "help":
+                            print("commands:")
+                            print("1 - exit                         : ends the developer mode")
+                            print("2 - create-react-app <appname>   : creates react app (needs npm, npx and nodejs)")
+                            print("3 - clear                        : clears the screen")
+                            print("4 - run-react-app                : runs your react app")
+                            print("5 - python <filename>            : executes a python file")
+                            print("6 - node <filename>              : executes a node js file")
+                            print("Warn! this developer mode is only for python, reactjs and nodejs")
+                        elif devcommand == "exit":
+                            print("ended developer mode")
+                            break
+                        elif devcommand == "clear":
+                            self.clear_screen()
+                        elif devcommand.startswith("create-react-app"):
+                            appname = devcommand.split(" ")[1].strip("\"\'")
+                            subprocess.run(f"npx create-react-app {appname}", shell=True)
+                        elif devcommand == "run_react_app":
+                            subprocess.run("npm run", shell=True)
+                        elif devcommand.startswith("python"):
+                            filename = devcommand.split(" ")[1].strip("\"\'")
+                            with open(filename,"r") as f:
+                                code = f.read()
+                            exec(code)
+                        elif devcommand.startswith("node"):
+                            filename = devcommand.split(" ")[1].strip("\"\'")
+                            subprocess.run(f"node {filename}", shell=True)
+                        else:
+                            print(f"Err: uknown command. {devcommand}")
             else:
                 print(f"Err: command not found. {command}")
 
