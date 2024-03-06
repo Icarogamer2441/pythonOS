@@ -102,7 +102,7 @@ class System:
     def RunOS(self, username, password):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.0 by jose icaro  |")
+        print("|  pythonOS 2.1 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -231,6 +231,8 @@ class System:
                 print("delallcmds                                       : delete all your custom commands")
                 print("addedthings                                      : see what features are added in this update")
                 print("developermode                                    : enters developer mode")
+                print("imhungry                                         : you're really hungry?")
+                print("pyosvirusim                                      : simulated virus for pythonOS")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -245,7 +247,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.0")
+                print("pythonOS by jose icaro. version: 2.1")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -290,7 +292,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.5")
+                print("version: 1.6")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -346,7 +348,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.0 by jose icaro  |")
+                print("|  pythonOS 2.1 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -395,6 +397,30 @@ class System:
                             subprocess.run(f"node {filename}", shell=True)
                         else:
                             print(f"Err: uknown command. {devcommand}")
+            elif command.startswith("imhungry"):
+                print("you're really hungry?")
+                yesno = input("chose (y/n) > ")
+                if yesno.lower() == "y" or yesno.lower() == "yes":
+                    print("here some food! now bye")
+                elif yesno.lower() == "n" or yesno.lower() == "no":
+                    print("okay. bye")
+                else:
+                    print("okay? i dont understand what're you saying")
+            elif command.startswith("pyosvirusim"):
+                run = input("do you want to run this simple virus? (y/n) > ")
+                if run.lower() == "yes" or run.lower() == "y":
+                    print("starting virus...")
+                    time.sleep(1)
+                    print("pythonOS have an virus!")
+                    while True:
+                        virus = input(f"\n{username}/pythonOS {cwd} >$ ")
+                        print("uknown command, you have only one command! command: shutdown")
+                        if virus.startswith("shutdown"):
+                            for i in range(100):
+                                print("Err: virus")
+                                time.sleep(0.1)
+                            break
+                    print("virus simulation ended!")
             else:
                 print(f"Err: command not found. {command}")
 
