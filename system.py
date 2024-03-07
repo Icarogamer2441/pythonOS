@@ -3,11 +3,21 @@ import platform
 import os
 import time
 import random
+import tkinter as tk
 
 class Bootloader:
     def __init__(self):
         self.clear_screen()
         print("welcome to pythonloader, an custom pythonOS bootloader! customize if you're creating your own pythonOS version")
+        print("=======================")
+        print("=                     =")
+        print("=  #######   #     #  =")
+        print("=  #      #   #   #   =")
+        print("=  #######      #     =")
+        print("=  #            #     =")
+        print("=  #            #     =")
+        print("=                     =")
+        print("=======================")
         self.runos = input("do you want to run your pythonOS version? (y/n) > ")
         if self.runos.lower() == "yes" or self.runos.lower() == "y":
             System()
@@ -23,6 +33,11 @@ class System:
         self.clear_screen()
         self.username = input("What's your name? > ")
         self.password = input("your new password? > ")
+        self.computername = input("what name will be your computer? (type 'nothing' to be default) > ")
+        if self.computername.lower() == "nothing":
+            self.computername = "pythonOS"
+        else:
+            pass
         self.base_directory = os.getcwd()
         self.customcmds = {} # dictionary to store custom commands
         print(f"You're using your host system to work with the file system!\nCurrent working directory: {self.base_directory}")
@@ -99,18 +114,20 @@ class System:
         reminder_time = input("Enter reminder time (HH:MM): ")
         print(f"Reminder set: {reminder_text} at {reminder_time}")
 
-    def RunOS(self, username, password):
+    def RunOS(self, username, computername):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.1 by jose icaro  |")
+        print("|  pythonOS 2.2 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
         print("+------------------------------+")
         while True:
+            if self.computername == "" or self.computername.lower() == "nothing":
+                self.computername = "pythonOS"
             self.relogin = False
             cwd = os.getcwd()
-            command = input(f"\n{username}/pythonOS {cwd} >$ ")
+            command = input(f"\n{username}@{self.computername} {cwd} >$ ")
             if command.startswith("print"):
                 message = command.split("-s ")[1].split(" -e")[0].strip("\"\'")
                 print(message)
@@ -232,7 +249,9 @@ class System:
                 print("addedthings                                      : see what features are added in this update")
                 print("developermode                                    : enters developer mode")
                 print("imhungry                                         : you're really hungry?")
-                print("pyosvirusim                                      : simulated virus for pythonOS")
+                print("removedthings                                    : shows all removed things (apps and commands)")
+                print("pythonosgui                                      : shows an gui with a welcome text")
+                print("renamcomputer                                   : renames your pythonOS computer name")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -247,7 +266,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.1")
+                print("pythonOS by jose icaro. version: 2.2")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -292,7 +311,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.6")
+                print("version: 1.7")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -348,7 +367,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.1 by jose icaro  |")
+                print("|  pythonOS 2.2 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -361,7 +380,9 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - developermode")
+                print("1 - removedthings")
+                print("2 - pythonosgui")
+                print("3 - renamcomputer")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -406,21 +427,21 @@ class System:
                     print("okay. bye")
                 else:
                     print("okay? i dont understand what're you saying")
-            elif command.startswith("pyosvirusim"):
-                run = input("do you want to run this simple virus? (y/n) > ")
-                if run.lower() == "yes" or run.lower() == "y":
-                    print("starting virus...")
-                    time.sleep(1)
-                    print("pythonOS have an virus!")
-                    while True:
-                        virus = input(f"\n{username}/pythonOS {cwd} >$ ")
-                        print("uknown command, you have only one command! command: shutdown")
-                        if virus.startswith("shutdown"):
-                            for i in range(100):
-                                print("Err: virus")
-                                time.sleep(0.1)
-                            break
-                    print("virus simulation ended!")
+            elif command.startswith("removedthings"):
+                print("removed things:")
+                print("command - pyosvirusim")
+            elif command.startswith("pythosgui"):
+                root = tk.Tk()
+                root.title("Welcome To PythonOS")
+                root.geometry("400x50")
+                root.resizable(False,False)
+
+                message_label = tk.Label(text="welcome to pythonOS!")
+                message_label.pack()
+
+                root.mainloop()
+            elif command.startswith("renamcomputer"):
+                self.computername = input("what's your new pythonOS computer name? > ")
             else:
                 print(f"Err: command not found. {command}")
 
