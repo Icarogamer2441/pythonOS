@@ -41,7 +41,7 @@ class System:
         self.base_directory = os.getcwd()
         self.customcmds = {} # dictionary to store custom commands
         print(f"You're using your host system to work with the file system!\nCurrent working directory: {self.base_directory}")
-        self.RunOS(self.username, self.password)
+        self.RunOS()
         if self.relogin == True:
             System()
         else:
@@ -114,10 +114,10 @@ class System:
         reminder_time = input("Enter reminder time (HH:MM): ")
         print(f"Reminder set: {reminder_text} at {reminder_time}")
 
-    def RunOS(self, username, computername):
+    def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.2 by jose icaro  |")
+        print("|  pythonOS 2.3 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -127,7 +127,7 @@ class System:
                 self.computername = "pythonOS"
             self.relogin = False
             cwd = os.getcwd()
-            command = input(f"\n{username}@{self.computername} {cwd} >$ ")
+            command = input(f"\n{self.username}@{self.computername} {cwd} >$ ")
             if command.startswith("print"):
                 message = command.split("-s ")[1].split(" -e")[0].strip("\"\'")
                 print(message)
@@ -167,7 +167,7 @@ class System:
                     fakeperson = input("Fake person name > ")
                     print("Use 'exit' to stop the chat")
                     while True:
-                        yourmessage = input(f"{username} > ")
+                        yourmessage = input(f"{self.username} > ")
                         print(yourmessage)
                         fakemessage = input(f"{fakeperson} > ")
                         print(fakemessage)
@@ -178,6 +178,7 @@ class System:
                     print("1 - fakechat")
                     print("2 - guesstnumber")
                     print("3 - createpyosver")
+                    print("4 - todolist")
                 elif app.lower() == "guesstnumber":
                     veripassword = input("what's your password? >$ ")
                     if veripassword != self.password:
@@ -209,6 +210,19 @@ class System:
                         os.system('vim ' + f"{vername}.py")
                     else:
                         print("you now have the custom system file but you dont gonna edit. (you can edit with other file editor)")
+                elif app.lower() == "todolist":
+                    print("use 'end' to end your todolist, and use 'show' to show all your items")
+                    items = []
+                    while True:
+                        additem = input("> ")
+                        if additem.lower() == "end":
+                            print("ended...")
+                            break
+                        elif additem.lower() == "show":
+                            for item in items:
+                                print(item)
+                        else:
+                            items.append(additem)
             elif command.startswith("help"):
                 print("print -s <message> -e                            : prints a message")
                 print("vim <filename>                                   : open a file using vim (only works if you have vim installed)")
@@ -251,7 +265,10 @@ class System:
                 print("imhungry                                         : you're really hungry?")
                 print("removedthings                                    : shows all removed things (apps and commands)")
                 print("pythonosgui                                      : shows an gui with a welcome text")
-                print("renamcomputer                                   : renames your pythonOS computer name")
+                print("renamcomputer                                    : renames your pythonOS computer name")
+                print("changeusername                                   : changes your username")
+                print("changepassword                                   : changes your password")
+                print("showpass                                         : shows your pythonOS password")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -266,7 +283,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.2")
+                print("pythonOS by jose icaro. version: 2.3")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -311,7 +328,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.7")
+                print("version: 1.8")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -367,7 +384,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.2 by jose icaro  |")
+                print("|  pythonOS 2.3 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -379,10 +396,11 @@ class System:
                 self.customcmds = {}
             elif command.startswith("addedthings"):
                 print("apps:")
+                print("1 - todolist")
                 print("commands:")
-                print("1 - removedthings")
-                print("2 - pythonosgui")
-                print("3 - renamcomputer")
+                print("1 - changepassword")
+                print("2 - changeusername")
+                print("3 - showpass")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -442,6 +460,16 @@ class System:
                 root.mainloop()
             elif command.startswith("renamcomputer"):
                 self.computername = input("what's your new pythonOS computer name? > ")
+            elif command.startswith("changeusername"):
+                self.username = input("your new username > ")
+            elif command.startswith("changepassword"):
+                oldpassword = input("what's your old password? > ")
+                if oldpassword == self.password:
+                    self.password = input("what's your new password? > ")
+                else:
+                    print("incorrect password! use the command 'showpass' to show your password")
+            elif command.startswith("showpass"):
+                print(f"your current password is: {self.password}")
             else:
                 print(f"Err: command not found. {command}")
 
