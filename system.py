@@ -34,6 +34,7 @@ class System:
         self.username = input("What's your name? > ")
         self.password = input("your new password? > ")
         self.computername = input("what name will be your computer? (type 'nothing' to be default) > ")
+        self.foodcount = 0
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
         else:
@@ -117,7 +118,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.3 by jose icaro  |")
+        print("|  pythonOS 2.4 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -269,6 +270,8 @@ class System:
                 print("changeusername                                   : changes your username")
                 print("changepassword                                   : changes your password")
                 print("showpass                                         : shows your pythonOS password")
+                print("foods <foodtype>                                 : foods!")
+                print("foods -a                                         : shows an help from the foods types")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -283,7 +286,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.3")
+                print("pythonOS by jose icaro. version: 2.4")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -328,7 +331,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.8")
+                print("version: 1.9")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -384,7 +387,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.3 by jose icaro  |")
+                print("|  pythonOS 2.4 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -396,11 +399,9 @@ class System:
                 self.customcmds = {}
             elif command.startswith("addedthings"):
                 print("apps:")
-                print("1 - todolist")
                 print("commands:")
-                print("1 - changepassword")
-                print("2 - changeusername")
-                print("3 - showpass")
+                print("1 - foods <foodstype>")
+                print("2 - foods -a")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -470,6 +471,16 @@ class System:
                     print("incorrect password! use the command 'showpass' to show your password")
             elif command.startswith("showpass"):
                 print(f"your current password is: {self.password}")
+            elif command.startswith("foods"):
+                foodtype = command.split(" ")[1].strip("\"\'")
+                if foodtype == "-a":
+                    print("foods types:")
+                    print("1 - show")
+                    print("2 - take")
+                elif foodtype == "show":
+                    print(f"you have {self.foodcount} foods")
+                elif foodtype == "take":
+                    self.foodcount += random.randint(1,5)
             else:
                 print(f"Err: command not found. {command}")
 
