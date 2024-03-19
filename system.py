@@ -4,6 +4,7 @@ import os
 import time
 import random
 import tkinter as tk
+from pytkinterui import Window
 
 class Bootloader:
     def __init__(self):
@@ -118,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.4 by jose icaro  |")
+        print("|  pythonOS 2.5 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -272,6 +273,7 @@ class System:
                 print("showpass                                         : shows your pythonOS password")
                 print("foods <foodtype>                                 : foods!")
                 print("foods -a                                         : shows an help from the foods types")
+                print("desktop                                          : activate desktop mode (dont have terminal commands, and need 5 foods or more)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -286,7 +288,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.4")
+                print("pythonOS by jose icaro. version: 2.5")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -331,7 +333,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 1.9")
+                print("version: 2.0")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -387,7 +389,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.4 by jose icaro  |")
+                print("|  pythonOS 2.5 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -400,8 +402,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - foods <foodstype>")
-                print("2 - foods -a")
+                print("1 - desktop")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -448,7 +449,6 @@ class System:
                     print("okay? i dont understand what're you saying")
             elif command.startswith("removedthings"):
                 print("removed things:")
-                print("command - pyosvirusim")
             elif command.startswith("pythosgui"):
                 root = tk.Tk()
                 root.title("Welcome To PythonOS")
@@ -481,8 +481,32 @@ class System:
                     print(f"you have {self.foodcount} foods")
                 elif foodtype == "take":
                     self.foodcount += random.randint(1,5)
+            elif command.startswith("desktop"):
+                if self.foodcount > 4:
+                    self.foodcount -= 5
+                    desktop = Window(750,570,"pythonOS desktop v1.0")
+                    desktop.window.configure(bg="yellow")
+
+                    def pythontext():
+                        root = Window(300,300,"pythonText-v1.0")
+
+                        textbox = root.new_text(0,0,300,300,"black","white")
+
+                        root.window.mainloop()
+
+                    taskbar = desktop.new_menu()
+
+                    startmenu = desktop.new_submenu(taskbar, "Start")
+                    desktop.new_submenu_button(startmenu, "shutdown", command=lambda: desktop.window.destroy())
+                    desktop.new_menu_separator(startmenu)
+                    desktop.new_submenu_button(startmenu, "pythonText", command=lambda: pythontext())
+
+                    desktop.window.mainloop()
+                else:
+                    print("you need 5 foods or more to run desktop!")
             else:
                 print(f"Err: command not found. {command}")
+                
 
     def copy(self, filedir, targetdir):
         if platform.system == "Windows":
