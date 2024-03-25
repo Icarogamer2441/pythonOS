@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.5 by jose icaro  |")
+        print("|  pythonOS 2.6 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -274,6 +274,7 @@ class System:
                 print("foods <foodtype>                                 : foods!")
                 print("foods -a                                         : shows an help from the foods types")
                 print("desktop                                          : activate desktop mode (dont have terminal commands, and need 5 foods or more)")
+                print("youtube                                          : shows my youtube channel link")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -288,7 +289,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.5")
+                print("pythonOS by jose icaro. version: 2.6")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -333,7 +334,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 2.0")
+                print("version: 2.1")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -389,7 +390,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.5 by jose icaro  |")
+                print("|  pythonOS 2.6 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -402,7 +403,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - desktop")
+                print("1 - youtube")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -488,9 +489,18 @@ class System:
                     desktop.window.configure(bg="yellow")
 
                     def pythontext():
-                        root = Window(300,300,"pythonText-v1.0")
+                        root = Window(300,300,"pythonText-v1.1")
+                        
+                        def save():
+                            filename = root.new_input("filename","your file name: ")
+                            with open(filename, "w") as f:
+                                f.write(textbox.get("1.0", "end-1c"))
 
-                        textbox = root.new_text(0,0,300,300,"black","white")
+                        textbox = root.new_text(0,0,300,290,"black","white")
+                        mainmenu = root.new_menu()
+
+                        filemenu = root.new_submenu(mainmenu, "File")
+                        root.new_submenu_button(filemenu,"Save",command=lambda: save())
 
                         root.window.mainloop()
 
@@ -504,6 +514,8 @@ class System:
                     desktop.window.mainloop()
                 else:
                     print("you need 5 foods or more to run desktop!")
+            elif command.startswith("youtube"):
+                print("my youtube channel: https://www.youtube.com/channel/UC1rE1iC0w3sWgNCR4FKiqmg")
             else:
                 print(f"Err: command not found. {command}")
                 
