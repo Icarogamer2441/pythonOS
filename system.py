@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.6 by jose icaro  |")
+        print("|  pythonOS 2.7 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -140,7 +140,7 @@ class System:
                 typename = command.split(" --type ")[1].split(" ")[0].strip("\"\'")
                 itemname = command.split(" --name ")[1].strip("\"\'")
                 if typename.startswith("file"):
-                    if platform.system == "Windows":
+                    if platform.system() == "Windows":
                         subprocess.run(f'echo "" >> {itemname}', shell=True)
                     else:
                         subprocess.run(f"touch {itemname}", shell=True)
@@ -275,6 +275,7 @@ class System:
                 print("foods -a                                         : shows an help from the foods types")
                 print("desktop                                          : activate desktop mode (dont have terminal commands, and need 5 foods or more)")
                 print("youtube                                          : shows my youtube channel link")
+                print("pytest                                           : test :D")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -289,7 +290,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.6")
+                print("pythonOS by jose icaro. version: 2.7")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -334,7 +335,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 2.1")
+                print("version: 2.2")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -354,7 +355,7 @@ class System:
                     print("do you really want to create your version? okay, here the tutorial:")
                     print("learn python")
                     print("see the pythonOS code and put all the commands inside of the 'System' class")
-                    print("inside system class, put an 'elif command.startswith('cmdname'):' on the RunOS function, after this, put your command function inside of the new 'elif'")
+                    print("inside system class, put an 'elif command.startswith('cmdname'):' in the RunOS function, after this, put your command function inside of the new 'elif'")
                     print("save the file")
                     print("if you want, add GUI to your pythonOS version (tkinter is super recommended to add gui)")
                     print("add apps inside of the 'start' command if you want")
@@ -390,7 +391,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.6 by jose icaro  |")
+                print("|  pythonOS 2.7 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -403,7 +404,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - youtube")
+                print("1 - pytest")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -516,9 +517,11 @@ class System:
                     print("you need 5 foods or more to run desktop!")
             elif command.startswith("youtube"):
                 print("my youtube channel: https://www.youtube.com/channel/UC1rE1iC0w3sWgNCR4FKiqmg")
+            elif command.startswith("pytest"):
+                print("you corromped your system!")
+                break
             else:
                 print(f"Err: command not found. {command}")
-                
 
     def copy(self, filedir, targetdir):
         if platform.system == "Windows":
@@ -550,8 +553,10 @@ class System:
 
     def create_python_file(self, filename):
         if not filename.endswith(".py"):
-            filename += ".py"
-        subprocess.run(f"touch {filename}", shell=True)
+            if platform.system() == "Windows":
+                subprocess.run(f'echo "" >> {filename + ".py"}', shell=True)
+            else:
+                subprocess.run(f"touch {filename + ".py"}", shell=True)
 
     def open_file(self, filename):
         if platform.system() == "Windows":
