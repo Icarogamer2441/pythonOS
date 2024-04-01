@@ -1,3 +1,4 @@
+# please, install the pytkinterui (my own GUI library made with tkinter for my projects). install using "pip install pytkinterui"
 import subprocess
 import platform
 import os
@@ -19,7 +20,7 @@ class Bootloader:
         print("=  #            #     =")
         print("=                     =")
         print("=======================")
-        self.runos = input("do you want to run your pythonOS version? (y/n) > ")
+        self.runos = input("do you want to run this pythonOS version? (y/n) > ")
         if self.runos.lower() == "yes" or self.runos.lower() == "y":
             System()
     
@@ -119,7 +120,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.7 by jose icaro  |")
+        print("|  pythonOS 2.8 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -276,6 +277,8 @@ class System:
                 print("desktop                                          : activate desktop mode (dont have terminal commands, and need 5 foods or more)")
                 print("youtube                                          : shows my youtube channel link")
                 print("pytest                                           : test :D")
+                print("allos                                            : show all my OS's projects")
+                print("abouticaroos                                     : about my second OS (made in libreoffice impress)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -290,7 +293,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.7")
+                print("pythonOS by jose icaro. version: 2.8")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -334,8 +337,8 @@ class System:
                         else:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
-                print("Evig pythonOS terminal system name, made for make pythonOS more realistic OS")
-                print("version: 2.2")
+                print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
+                print("version: 2.3")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -391,7 +394,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.7 by jose icaro  |")
+                print("|  pythonOS 2.8 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -404,7 +407,8 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - pytest")
+                print("1 - allos")
+                print("2 - abouticaroos")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -486,7 +490,7 @@ class System:
             elif command.startswith("desktop"):
                 if self.foodcount > 4:
                     self.foodcount -= 5
-                    desktop = Window(750,570,"pythonOS desktop v1.0")
+                    desktop = Window(750,570,"pythonOS desktop v1.1")
                     desktop.window.configure(bg="yellow")
 
                     def pythontext():
@@ -504,13 +508,22 @@ class System:
                         root.new_submenu_button(filemenu,"Save",command=lambda: save())
 
                         root.window.mainloop()
+                    
+                    def pythonwelcome():
+                        root = Window(300,300,"WELCOME!!!")
+                        root.window.resizable(False,False)
+
+                        messagelabel = root.new_label("welcome to pythonOS!",0,0,300,300,"white","black")
+
+                        root.window.mainloop()
 
                     taskbar = desktop.new_menu()
 
                     startmenu = desktop.new_submenu(taskbar, "Start")
-                    desktop.new_submenu_button(startmenu, "shutdown", command=lambda: desktop.window.destroy())
+                    desktop.new_submenu_button(startmenu,"shutdown",command=lambda: desktop.window.destroy())
                     desktop.new_menu_separator(startmenu)
-                    desktop.new_submenu_button(startmenu, "pythonText", command=lambda: pythontext())
+                    desktop.new_submenu_button(startmenu,"Python Text",command=lambda: pythontext())
+                    desktop.new_submenu_button(startmenu,"Python Welcome",command=lambda: pythonwelcome())
 
                     desktop.window.mainloop()
                 else:
@@ -520,6 +533,13 @@ class System:
             elif command.startswith("pytest"):
                 print("you corromped your system!")
                 break
+            elif command.startswith("allos"):
+                print("All OS's:")
+                print("icaroOS > icarogamer2441.github.io")
+                print("pythonOS > this OS")
+            elif command.startswith("abouticaroos"):
+                print("About my other OS:")
+                print("icaroOS is an operating system made with libreoffice impress (for this reason icaroOS is very limited) if you want to use it, download and install libreoffice and download icaroOS HOME EDITION through this link: 'icarogamer2441.github.io/' and the PRO EDITION through this link: icarogamer2441.github.io/pro/' because PRO EDITION is a PRO edition, it is more complete and less full of bugs, but there are some bugs in it, especially in the HOME EDITION")
             else:
                 print(f"Err: command not found. {command}")
 
