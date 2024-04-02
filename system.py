@@ -120,7 +120,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.8 by jose icaro  |")
+        print("|  pythonOS 2.9 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -279,6 +279,7 @@ class System:
                 print("pytest                                           : test :D")
                 print("allos                                            : show all my OS's projects")
                 print("abouticaroos                                     : about my second OS (made in libreoffice impress)")
+                print("aboutpythonos                                    : about this OS (made in python)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -293,7 +294,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.8")
+                print("pythonOS by jose icaro. version: 2.9")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -319,7 +320,7 @@ class System:
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
                 self.copy(file, targetdir)
             elif command.startswith("author"):
-                print("josé icaro. github: icarogamer2441")
+                print("josÃ© icaro. github: icarogamer2441")
             elif command.startswith("realcmd"):
                 veripassword = input("what's your password? ")
                 if veripassword != self.password:
@@ -338,7 +339,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.3")
+                print("version: 2.4")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -363,7 +364,7 @@ class System:
                     print("if you want, add GUI to your pythonOS version (tkinter is super recommended to add gui)")
                     print("add apps inside of the 'start' command if you want")
                     print("costumize more and more your pythonOS version!")
-                    print("put the credits that you made the version, and the real pythonOS creator. me (josé icaro)")
+                    print("put the credits that you made the version, and the real pythonOS creator. me (josÃ© icaro)")
                     print("publish in github")
                     print("enjoy your custom version!")
             elif command.startswith("cretecmd"):
@@ -394,7 +395,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.8 by jose icaro  |")
+                print("|  pythonOS 2.9 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -407,8 +408,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - allos")
-                print("2 - abouticaroos")
+                print("1 - aboutpythonos")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -540,6 +540,9 @@ class System:
             elif command.startswith("abouticaroos"):
                 print("About my other OS:")
                 print("icaroOS is an operating system made with libreoffice impress (for this reason icaroOS is very limited) if you want to use it, download and install libreoffice and download icaroOS HOME EDITION through this link: 'icarogamer2441.github.io/' and the PRO EDITION through this link: icarogamer2441.github.io/pro/' because PRO EDITION is a PRO edition, it is more complete and less full of bugs, but there are some bugs in it, especially in the HOME EDITION")
+            elif command.startswith("aboutpythonos"):
+                print("About pythonOS:")
+                print("pythonOS is a simple operating system made in python, it was made for other people to create their own customized operating systems, create what you want and add what you think, be happy customizing this system and if you want, you can post your pythonOS version and any place")
             else:
                 print(f"Err: command not found. {command}")
 
