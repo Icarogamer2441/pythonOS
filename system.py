@@ -4,7 +4,6 @@ import platform
 import os
 import time
 import random
-import tkinter as tk
 from pytkinterui import Window
 
 class Bootloader:
@@ -120,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 2.9 by jose icaro  |")
+        print("|  pythonOS 3.1 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -246,11 +245,11 @@ class System:
                 print("openfile <filename>                              : open a file in the default editor")
                 print("rename <oldname> <newname>                       : renames a file or folder")
                 print("sc <filename>                                    : shows file content")
-                print("aptinstall -s <pkgname> -e                       : downloads pkgs to your computer using sudo apt install (only works with linux debian based)")
+                print("aptinstall -s <pkgname> -e                       : downloads pkgs to your computer using sudo apt install (only works with linux that uses 'sudo apt install pkg1-name pkg2-name ...')")
                 print("coy --filedir <filetocopy> --targetdir <targetofthecopiedfile> : copy an file")
                 print("author                                           : shows the pythonOS creator")
                 print("realcmd                                          : starts an venv on pythonOS that uses your real pc commands")
-                print("evig                                             : shows the terminal system version (linux is bash, pythonOS is named Evig)")
+                print("evig                                             : shows the Evig version (linux is bash, pythonOS is named Evig)")
                 print("date                                             : Show the current date")
                 print("calculator                                       : Opens a simple calculator")
                 print("reminder                                         : Set a reminder for an event")
@@ -267,7 +266,6 @@ class System:
                 print("developermode                                    : enters developer mode")
                 print("imhungry                                         : you're really hungry?")
                 print("removedthings                                    : shows all removed things (apps and commands)")
-                print("pythonosgui                                      : shows an gui with a welcome text")
                 print("renamcomputer                                    : renames your pythonOS computer name")
                 print("changeusername                                   : changes your username")
                 print("changepassword                                   : changes your password")
@@ -280,6 +278,9 @@ class System:
                 print("allos                                            : show all my OS's projects")
                 print("abouticaroos                                     : about my second OS (made in libreoffice impress)")
                 print("aboutpythonos                                    : about this OS (made in python)")
+                print("google                                           : open google.com")
+                print("node -s <command. ex: file.js> -e                : executes a nodejs command")
+                print("nodeinstall -s <pkgs-name> -e                    : executes a npm install <pkg-name>")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -294,7 +295,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 2.9")
+                print("pythonOS by jose icaro. version: 3.1")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -320,7 +321,7 @@ class System:
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
                 self.copy(file, targetdir)
             elif command.startswith("author"):
-                print("josÃ© icaro. github: icarogamer2441")
+                print("josé icaro. github: icarogamer2441")
             elif command.startswith("realcmd"):
                 veripassword = input("what's your password? ")
                 if veripassword != self.password:
@@ -339,7 +340,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.4")
+                print("version: 2.6")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -395,7 +396,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 2.9 by jose icaro  |")
+                print("|  pythonOS 3.1 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -408,7 +409,8 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - aboutpythonos")
+                print("1 - node -s <command> -e")
+                print("2 - nodeinstall -s <pkgs> -e")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -455,16 +457,6 @@ class System:
                     print("okay? i dont understand what're you saying")
             elif command.startswith("removedthings"):
                 print("removed things:")
-            elif command.startswith("pythosgui"):
-                root = tk.Tk()
-                root.title("Welcome To PythonOS")
-                root.geometry("400x50")
-                root.resizable(False,False)
-
-                message_label = tk.Label(text="welcome to pythonOS!")
-                message_label.pack()
-
-                root.mainloop()
             elif command.startswith("renamcomputer"):
                 self.computername = input("what's your new pythonOS computer name? > ")
             elif command.startswith("changeusername"):
@@ -543,6 +535,17 @@ class System:
             elif command.startswith("aboutpythonos"):
                 print("About pythonOS:")
                 print("pythonOS is a simple operating system made in python, it was made for other people to create their own customized operating systems, create what you want and add what you think, be happy customizing this system and if you want, you can post your pythonOS version and any place")
+            elif command.startswith("google"):
+                if platform.system() == "Windows":
+                    subprocess.run("start https://www.google.com", shell=True)
+                else:
+                    subprocess.run("xdg-open https://www.google.com", shell=True)
+            elif command.startswith("node"):
+                nodecommand = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
+                subprocess.run(f"node {nodecommand}", shell=True)
+            elif command.startswith("nodeinstall"):
+                nodeinstcmd = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
+                subprocess.run(f"npm install {nodeinstcmd}", shell=True)
             else:
                 print(f"Err: command not found. {command}")
 
@@ -579,7 +582,7 @@ class System:
             if platform.system() == "Windows":
                 subprocess.run(f'echo "" >> {filename + ".py"}', shell=True)
             else:
-                subprocess.run(f"touch {filename + ".py"}", shell=True)
+                subprocess.run(f'touch {filename + ".py"}', shell=True)
 
     def open_file(self, filename):
         if platform.system() == "Windows":
