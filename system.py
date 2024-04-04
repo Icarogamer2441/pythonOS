@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.1 by jose icaro  |")
+        print("|  pythonOS 3.2 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -281,6 +281,8 @@ class System:
                 print("google                                           : open google.com")
                 print("node -s <command. ex: file.js> -e                : executes a nodejs command")
                 print("nodeinstall -s <pkgs-name> -e                    : executes a npm install <pkg-name>")
+                print("kmpt                                             : don't use this command!")
+                print("micro <filename>                                 : starts the micro text editor (you need to have it installed)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -295,7 +297,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.1")
+                print("pythonOS by jose icaro. version: 3.2")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -340,7 +342,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.6")
+                print("version: 2.7")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -396,7 +398,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.1 by jose icaro  |")
+                print("|  pythonOS 3.2 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -409,8 +411,8 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - node -s <command> -e")
-                print("2 - nodeinstall -s <pkgs> -e")
+                print("1 - kmpt")
+                print("2 - micro <filename>")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -546,6 +548,12 @@ class System:
             elif command.startswith("nodeinstall"):
                 nodeinstcmd = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 subprocess.run(f"npm install {nodeinstcmd}", shell=True)
+            elif command.startswith("kmpt"):
+                print("K = kill. M = my. P = pythonOS. T = terminal")
+                break
+            elif command.startswith("micro"):
+                filename = command.split(" ")[1].strip("\"\'")
+                subprocess.run(f"micro {filename}", shell=True)
             else:
                 print(f"Err: command not found. {command}")
 
