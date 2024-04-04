@@ -5,4 +5,6 @@ COPY . /pythonOS
 
 WORKDIR /pythonOS
 
+RUN pip install pytkinterui
+
 CMD ["python", "system.py"]
