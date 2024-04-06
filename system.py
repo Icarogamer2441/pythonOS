@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.2 by jose icaro  |")
+        print("|  pythonOS 3.3 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -297,7 +297,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.2")
+                print("pythonOS by jose icaro. version: 3.3")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -323,7 +323,7 @@ class System:
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
                 self.copy(file, targetdir)
             elif command.startswith("author"):
-                print("josé icaro. github: icarogamer2441")
+                print("josé icaro. github: https://github.com/icarogamer2441/")
             elif command.startswith("realcmd"):
                 veripassword = input("what's your password? ")
                 if veripassword != self.password:
@@ -342,7 +342,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.7")
+                print("version: 2.8")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -398,7 +398,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.2 by jose icaro  |")
+                print("|  pythonOS 3.3 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -411,8 +411,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - kmpt")
-                print("2 - micro <filename>")
+                print("1 - secret")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -554,6 +553,13 @@ class System:
             elif command.startswith("micro"):
                 filename = command.split(" ")[1].strip("\"\'")
                 subprocess.run(f"micro {filename}", shell=True)
+            elif command.startswith("secret"):
+                print("DONT USE THIS COMMAND!")
+                randomsss = input("DO YOU WANT TO DHUWIDWUIDHWIUDWTUDGW98SWIYDG? > ")
+                if randomsss.lower() == "y":
+                    print("O_O")
+                else:
+                    print("o_O")
             else:
                 print(f"Err: command not found. {command}")
 
