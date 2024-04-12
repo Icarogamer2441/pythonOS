@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.3 by jose icaro  |")
+        print("|  pythonOS 3.4 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -283,6 +283,7 @@ class System:
                 print("nodeinstall -s <pkgs-name> -e                    : executes a npm install <pkg-name>")
                 print("kmpt                                             : don't use this command!")
                 print("micro <filename>                                 : starts the micro text editor (you need to have it installed)")
+                print("pyoscreatemode                                   : a Creator mode to you create and test your own pythonOS version")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -297,7 +298,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.3")
+                print("pythonOS by jose icaro. version: 3.4")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -342,7 +343,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.8")
+                print("version: 2.9")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -398,7 +399,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.3 by jose icaro  |")
+                print("|  pythonOS 3.4 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -411,7 +412,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - secret")
+                print("1 - pyoscreatemode")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -560,6 +561,43 @@ class System:
                     print("O_O")
                 else:
                     print("o_O")
+            elif command.startswith("pyoscreatemode"):
+                print("you need vim installed!")
+                ihavevim = input("do you have vim installed? (Y/n) > ")
+                if ihavevim.lower() == "y" or ihavevim.lower() == "yes":
+                    while True:
+                        editmodecmd = input("type 'h' for help > ")
+                        if editmodecmd == "h":
+                            print("## Creator commands:")
+                            print("c - create the pythonos version file")
+                            print("e - edits the pythonos version file")
+                            print("p - executes your pythonOS version")
+                            print("## exit")
+                            print("q - quit")
+                            print("## clear")
+                            print("o - clear the screen")
+                            print("## steps")
+                            print("first, create the pythonOS version file, and edit them, add your commands, remove the commands you want, edit the pythonOS version name, edit the commands (if you want), create a custom version of evig and the version of your pythonOS version, and the final step! publish your pythonOS version (if you want)")
+                        elif editmodecmd == "c":
+                            versioname = input("what's your pythonOS version name? (dont use spaces) > ")
+                            with open("system.py", "r") as f:
+                                with open(versioname + ".py", "w") as files:
+                                    files.write(f.read())
+                        elif editmodecmd == "e":
+                            filename = input("what's your pythonOS version name? > ")
+                            subprocess.run(f"vim {filename + '.py'}", shell=True)
+                        elif editmodecmd == "q":
+                            break
+                        elif editmodecmd == "p":
+                            filename = input("what's your pythonOS version name? > ")
+                            if platform.system == "Windows":
+                                subprocess.run(f"python {filename + '.py'}", shell=True)
+                            else:
+                                subprocess.run(f"python3 {filename + '.py'}", shell=True)
+                        elif editmodecmd == "o":
+                            self.clear_screen()
+                else:
+                    print("you only can create your own pythonOS version with vim!")
             else:
                 print(f"Err: command not found. {command}")
 
