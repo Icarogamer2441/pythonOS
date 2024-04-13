@@ -35,6 +35,7 @@ class System:
         self.username = input("What's your name? > ")
         self.password = input("your new password? > ")
         self.computername = input("what name will be your computer? (type 'nothing' to be default) > ")
+        self.max_memory = int(input("what's your max memory you gonna use? (i recommend 1000) > "))
         self.foodcount = 0
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
@@ -119,7 +120,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.5 by jose icaro  |")
+        print("|  pythonOS 3.6 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -130,6 +131,13 @@ class System:
             self.relogin = False
             cwd = os.getcwd()
             command = input(f"\n{self.username}@{self.computername} {cwd} >$ ")
+            with open("pythonOSmem.txt","a") as f:
+                f.write("1")
+                with open("pythonOSmem.txt", "r") as mem:
+                    content = mem.read()
+                    if len(content) >= self.max_memory:
+                        print(f"you reached the max of your memory! you used {len(content)} of your memory")
+                        break
             if command.startswith("print"):
                 message = command.split("-s ")[1].split(" -e")[0].strip("\"\'")
                 print(message)
@@ -285,6 +293,8 @@ class System:
                 print("micro <filename>                                 : starts the micro text editor (you need to have it installed)")
                 print("pyoscreatemode                                   : a Creator mode to you create and test your own pythonOS version")
                 print("systemicon                                       : show the pythonOS icon")
+                print("memoryused                                       : shows the pythonOS used memory file")
+                print("formatpythosdiskfile                             : formats the pythonOSmem.txt file (pythonOS memory disk file)")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -299,7 +309,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.5")
+                print("pythonOS by jose icaro. version: 3.6")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -344,7 +354,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.0")
+                print("version: 3.1")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -400,7 +410,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.5 by jose icaro  |")
+                print("|  pythonOS 3.6 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -413,7 +423,8 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - systemicon")
+                print("1 - memoryused")
+                print("2 - formatpythosdiskfile")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -625,6 +636,15 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWOONMMMMMMMO.:NMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc':::c:c::,.oWMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNK000OOOOOO0NMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
+            elif command.startswith("memoryused"):
+                with open("pythonOSmem.txt","r") as f:
+                    content = f.read()
+                with open("pythonOSmem.txt","a") as files:
+                    files.write("22")
+                print(len(content))
+            elif command.startswith("formatpythosdiskfile"):
+                with open("pythonOSmem.txt", "w") as f:
+                    f.write("")
             else:
                 print(f"Err: command not found. {command}")
 
