@@ -119,7 +119,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.4 by jose icaro  |")
+        print("|  pythonOS 3.5 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -298,7 +298,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.4")
+                print("pythonOS by jose icaro. version: 3.5")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -343,7 +343,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 2.9")
+                print("version: 3.0")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -399,7 +399,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.4 by jose icaro  |")
+                print("|  pythonOS 3.5 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -412,7 +412,7 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - pyoscreatemode")
+                print("1 - systemicon")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -563,7 +563,7 @@ class System:
                     print("o_O")
             elif command.startswith("pyoscreatemode"):
                 print("you need vim installed!")
-                ihavevim = input("do you have vim installed? (Y/n) > ")
+                ihavevim = input("do you have a code editor installed (you need vim to use the edit file command)? (Y/n) > ")
                 if ihavevim.lower() == "y" or ihavevim.lower() == "yes":
                     while True:
                         editmodecmd = input("type 'h' for help > ")
@@ -598,6 +598,32 @@ class System:
                             self.clear_screen()
                 else:
                     print("you only can create your own pythonOS version with vim!")
+            elif command.startswith("systemicon"):
+                print("""MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMWXKK000NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMWkMMMMMMMMOMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMX; .....  lWMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMW0xo  ...... 'xkkkOXMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMWd  .........      KMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMWc  ........  kXX  kMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMWo  ......,  xKXX  x0OOOOKWMMMMMMMMMMMMMMMM
+MMMMMMMMKl   .   Xx'kxxx  ..:::::;.lNMMMMMMMMMMMMM
+MMMMMMMMMWNk   Xxccc     .kNWMMM0',0MMMMMMMMMMMMMM
+MMMMMMMMMMMK  ''''''  lWX; .OMMMMM0''0MMMMMMMMMMMM
+MMMMMMMMMMMWXkxdddddxKWK, .xMMMMM0';XMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMO. .o000OOo.:XNWWWWWWMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMXl',::::::. .;;::::;;oXMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMWNWWWWWMMo.l000000Ol:0MMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMo.oWWMMMMMWWMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMO,,:::::ccldXMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXK00Okkxxc.lWMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0';XMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWOONMMMMMMMO.:NMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc':::c:c::,.oWMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNK000OOOOOO0NMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
             else:
                 print(f"Err: command not found. {command}")
 
