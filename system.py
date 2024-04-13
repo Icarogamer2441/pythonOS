@@ -284,6 +284,7 @@ class System:
                 print("kmpt                                             : don't use this command!")
                 print("micro <filename>                                 : starts the micro text editor (you need to have it installed)")
                 print("pyoscreatemode                                   : a Creator mode to you create and test your own pythonOS version")
+                print("systemicon                                       : show the pythonOS icon")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
