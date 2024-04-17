@@ -47,7 +47,10 @@ print('--> about processes occurring:')
 print('Kernel3.8                   # is the pythonOS kernel')
 print('evig                        # all the commands')
 print("Bootloader                  # is the bootloader who loads the kernel that runs while you're running the system")
-print("pypackage                   # pythonOS package manager system")"""}
+print("pypackage                   # pythonOS package manager system")
+print("--> installed packages:")
+for package in self.packages:
+    print(package)"""}
         self.foodcount = 0
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
