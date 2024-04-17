@@ -652,7 +652,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
                     files.write("22")
                 print(len(content))
             elif command.startswith("formatpythosdiskfile"):
-                with open("pythonOSmem.txt", "w") as f:
+                with open(self.memory_path, "w") as f:
                     f.write("")
             elif command.startswith("pypackage-install"):
                 print("what is the name of the python file on your path to install has a package from pythonOS?")
