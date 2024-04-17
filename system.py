@@ -38,7 +38,16 @@ class Kernel:
         self.max_memory = int(input("what's your max memory you gonna use? (i recommend 1000) > "))
         memory_path_1 = input("what is the memory file path? (ex: /home/username/Documents/ or C:/username/Documents/) > ")
         self.memory_path = f"{memory_path_1}pythonOSmem.txt"
-        self.packages = {}
+        self.packages = {"ptop": """print('--> processes occurring:')
+print('Kernel3.8                   # System Kernel')
+print('evig                        # System Commands')
+print('Bootloader                  # System bootloader')
+print('pypackage                   # packages system')
+print('--> about processes occurring:')
+print('Kernel3.8                   # is the pythonOS kernel')
+print('evig                        # all the commands')
+print("Bootloader                  # is the bootloader who loads the kernel that runs while you're running the system")
+print("pypackage                   # pythonOS package manager system")"""}
         self.foodcount = 0
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
@@ -123,7 +132,7 @@ class Kernel:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.7 by jose icaro  |")
+        print("|  pythonOS 3.8 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -315,7 +324,7 @@ class Kernel:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.7")
+                print("pythonOS by jose icaro. version: 3.8")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -360,7 +369,7 @@ class Kernel:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.2")
+                print("version: 3.3")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -416,7 +425,7 @@ class Kernel:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.7 by jose icaro  |")
+                print("|  pythonOS 3.8 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -429,9 +438,8 @@ class Kernel:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - pypackage-install")
-                print("2 - pypackage-execute <installed-package-name>")
-                print("3 - pypackage-listinstalled")
+                print("packages:")
+                print("1 - ptop")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
