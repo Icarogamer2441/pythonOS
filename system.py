@@ -21,7 +21,7 @@ class Bootloader:
         print("=======================")
         self.runos = input("do you want to run this pythonOS version? (y/n) > ")
         if self.runos.lower() == "yes" or self.runos.lower() == "y":
-            System()
+            Kernel()
     
     def clear_screen(self):
         if platform.system() == "Windows":
@@ -29,13 +29,16 @@ class Bootloader:
         else:
             subprocess.run("clear", shell=True)
 
-class System:
+class Kernel:
     def __init__(self):
         self.clear_screen()
         self.username = input("What's your name? > ")
         self.password = input("your new password? > ")
         self.computername = input("what name will be your computer? (type 'nothing' to be default) > ")
         self.max_memory = int(input("what's your max memory you gonna use? (i recommend 1000) > "))
+        memory_path_1 = input("what is the memory file path? (ex: /home/username/Documents/ or C:/username/Documents/) > ")
+        self.memory_path = f"{memory_path_1}pythonOSmem.txt"
+        self.packages = {}
         self.foodcount = 0
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
@@ -46,7 +49,7 @@ class System:
         print(f"You're using your host system to work with the file system!\nCurrent working directory: {self.base_directory}")
         self.RunOS()
         if self.relogin == True:
-            System()
+            Kernel()
         else:
             pass
     
@@ -120,7 +123,7 @@ class System:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.6 by jose icaro  |")
+        print("|  pythonOS 3.7 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -131,9 +134,9 @@ class System:
             self.relogin = False
             cwd = os.getcwd()
             command = input(f"\n{self.username}@{self.computername} {cwd} >$ ")
-            with open("pythonOSmem.txt","a") as f:
+            with open(self.memory_path,"a") as f:
                 f.write("1")
-                with open("pythonOSmem.txt", "r") as mem:
+                with open(self.memory_path, "r") as mem:
                     content = mem.read()
                     if len(content) >= self.max_memory:
                         print(f"you reached the max of your memory! you used {len(content)} of your memory")
@@ -295,6 +298,9 @@ class System:
                 print("systemicon                                       : show the pythonOS icon")
                 print("memoryused                                       : shows the pythonOS used memory file")
                 print("formatpythosdiskfile                             : formats the pythonOSmem.txt file (pythonOS memory disk file)")
+                print("pypackage-install                                : make a .py file as custom command")
+                print("pypackage-execute <installed-package-name>       : executes a custom command made with pypackage-install")
+                print("pypackage-listinstalled                          : list of all the installed .py file packages")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -309,7 +315,7 @@ class System:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.6")
+                print("pythonOS by jose icaro. version: 3.7")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -354,7 +360,7 @@ class System:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.1")
+                print("version: 3.2")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -410,7 +416,7 @@ class System:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.6 by jose icaro  |")
+                print("|  pythonOS 3.7 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -423,8 +429,9 @@ class System:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - memoryused")
-                print("2 - formatpythosdiskfile")
+                print("1 - pypackage-install")
+                print("2 - pypackage-execute <installed-package-name>")
+                print("3 - pypackage-listinstalled")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -610,6 +617,8 @@ class System:
                             self.clear_screen()
                 else:
                     print("you only can create your own pythonOS version with vim!")
+                with open(self.memory_path, "a") as f:
+                    f.write("333")
             elif command.startswith("systemicon"):
                 print("""MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -637,14 +646,28 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc':::c:c::,.oWMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNK000OOOOOO0NMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
             elif command.startswith("memoryused"):
-                with open("pythonOSmem.txt","r") as f:
+                with open(self.memory_path,"r") as f:
                     content = f.read()
-                with open("pythonOSmem.txt","a") as files:
+                with open(self.memory_path,"a") as files:
                     files.write("22")
                 print(len(content))
             elif command.startswith("formatpythosdiskfile"):
                 with open("pythonOSmem.txt", "w") as f:
                     f.write("")
+            elif command.startswith("pypackage-install"):
+                print("what is the name of the python file on your path to install has a package from pythonOS?")
+                filename = input("> ")
+                with open(filename + ".py", "r") as f:
+                    content = f.read()
+                    self.packages[filename] = content
+            elif command.startswith("pypackage-execute"):
+                package_name = command.split(" ")[1].strip("\"\'")
+                for package_item in self.packages:
+                    if package_item == package_name:
+                        exec(self.packages[package_name])
+            elif command.startswith("pypackage-listinstalled"):
+                for package_name in self.packages:
+                    print(package_name)
             else:
                 print(f"Err: command not found. {command}")
 
