@@ -135,7 +135,7 @@ for package in self.packages:
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 3.8 by jose icaro  |")
+        print("|  pythonOS 3.9 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -313,6 +313,7 @@ for package in self.packages:
                 print("pypackage-install                                : make a .py file as custom command")
                 print("pypackage-execute <installed-package-name>       : executes a custom command made with pypackage-install")
                 print("pypackage-listinstalled                          : list of all the installed .py file packages")
+                print("pypackage-packagecode <installed-package-name>   : shows the code of the installed package")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -327,7 +328,7 @@ for package in self.packages:
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 3.8")
+                print("pythonOS by jose icaro. version: 3.9")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -372,7 +373,7 @@ for package in self.packages:
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.3")
+                print("version: 3.4")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -428,7 +429,7 @@ for package in self.packages:
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 3.8 by jose icaro  |")
+                print("|  pythonOS 3.9 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -441,8 +442,8 @@ for package in self.packages:
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
+                print("1 - pypackage-packagecode <installed-package-name>")
                 print("packages:")
-                print("1 - ptop")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -676,9 +677,15 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
                 for package_item in self.packages:
                     if package_item == package_name:
                         exec(self.packages[package_name])
+                        break
             elif command.startswith("pypackage-listinstalled"):
                 for package_name in self.packages:
                     print(package_name)
+            elif command.startswith("pypackage-packagecode"):
+                package_name = command.split(" ")[1].strip("\"\'")
+                for package_item in self.packages:
+                    if package_item == package_name:
+                        print(self.packages[package_name])
             else:
                 print(f"Err: command not found. {command}")
 
