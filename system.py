@@ -10,6 +10,7 @@ class Bootloader:
     def __init__(self):
         self.clear_screen()
         print("welcome to pythonloader, an custom pythonOS bootloader! customize if you're creating your own pythonOS version")
+        print("PythonOS is back!")
         print("=======================")
         print("=                     =")
         print("=   ######   #######  =")
@@ -39,24 +40,24 @@ class Kernel:
         memory_path_1 = input("what is the memory file path? (ex: /home/username/Documents/ or C:/username/Documents/) > ")
         self.memory_path = f"{memory_path_1}pythonOSmem.txt"
         self.packages = {"ptop": """print('--> processes occurring:')
-print('Kernel4.1                   # System Kernel')
+print('Kernel4.2                   # System Kernel')
 print('evig                        # System Commands')
 print('Bootloader                  # System bootloader')
 print('pypackage                   # packages system')
 print('--> about processes occurring:')
-print('Kernel4.1                   # is the pythonOS kernel')
+print('Kernel4.2                   # is the pythonOS kernel')
 print('evig                        # all the commands')
 print("Bootloader                  # is the bootloader who loads the kernel that runs while you're running the system")
 print("pypackage                   # pythonOS package manager system")
 print("--> installed packages:")
 for package in self.packages:
     print(package)""",
-        "kernel": """print("Kernel4.1")
+        "kernel": """print("Kernel4.2")
 print("PythonOS kernel")
 print("Kernel loaded by PythonOS Bootloader")""",
         "bootloader": """print("PythonOS bootloader:")
 print("Name: pythonloader")
-print("Running: Kernel4.1")
+print("Running: Kernel4.2")
 print("=======================")
 print("=                     =")
 print("=   ######   #######  =")
@@ -67,6 +68,7 @@ print("=   ######   #######  =")
 print("=                     =")
 print("=======================")"""}
         self.foodcount = 0
+        self.aboutme = ""
         if self.computername.lower() == "nothing":
             self.computername = "pythonOS"
         else:
@@ -150,7 +152,7 @@ print("=======================")"""}
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 4.1 by jose icaro  |")
+        print("|  pythonOS 4.2 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -314,7 +316,6 @@ print("=======================")"""}
                 print("youtube                                          : shows my youtube channel link")
                 print("pytest                                           : test :D")
                 print("allos                                            : show all my OS's projects")
-                print("abouticaroos                                     : about my second OS (made in libreoffice impress)")
                 print("aboutpythonos                                    : about this OS (made in python)")
                 print("google                                           : open google.com")
                 print("node -s <command. ex: file.js> -e                : executes a nodejs command")
@@ -325,11 +326,13 @@ print("=======================")"""}
                 print("systemicon                                       : show the pythonOS icon")
                 print("memoryused                                       : shows the pythonOS used memory file")
                 print("formatpythosdiskfile                             : formats the pythonOSmem.txt file (pythonOS memory disk file)")
-                print("pypackage-install                                : make a .py file as custom command")
+                print("pypackage-install <py-file>                      : make a .py file as custom command")
                 print("pypackage-execute <installed-package-name>       : executes a custom command made with pypackage-install")
                 print("pypackage-listinstalled                          : list of all the installed .py file packages")
                 print("pypackage-packagecode <installed-package-name>   : shows the code of the installed package")
                 print("code <path>                                      : open the vscode on the path you put")
+                print("aboutme -s <about-you-msg> -e                    : creates a new pkg to your pythonOS")
+                print("showaboutme                                      : shows the about me message")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -344,7 +347,7 @@ print("=======================")"""}
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 4.1")
+                print("pythonOS by jose icaro. version: 4.2")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -364,7 +367,7 @@ print("=======================")"""}
                 self.show_content(filename=filename)
             elif command.startswith("aptinstall"):
                 pkgs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
-                subprocess.run("sudo apt install {pkgs}", shell=True)
+                subprocess.run(f"sudo apt install {pkgs}", shell=True)
             elif command.startswith("coy"):
                 file = command.split(" --filedir ")[1].split(" --targetdir ")[0].strip("\"\'")
                 targetdir = command.split(" --targetdir ")[1].strip("\"\'")
@@ -389,7 +392,7 @@ print("=======================")"""}
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.6")
+                print("version: 3.7")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -445,7 +448,7 @@ print("=======================")"""}
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 4.1 by jose icaro  |")
+                print("|  pythonOS 4.2 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -458,9 +461,9 @@ print("=======================")"""}
             elif command.startswith("addedthings"):
                 print("apps:")
                 print("commands:")
-                print("1 - code <path>")
+                print("1 - aboutme -s <about-you-msg> -e")
+                print("2 - showaboutme")
                 print("packages:")
-                print("1 - bootloader")
             elif command.startswith("developermode"):
                 print("you will only do programming inside developer mode")
                 enter = input("do you really want to start developer mode? (y/n) > ")
@@ -577,11 +580,7 @@ print("=======================")"""}
                 break
             elif command.startswith("allos"):
                 print("All OS's:")
-                print("icaroOS > icarogamer2441.github.io")
                 print("pythonOS > this OS")
-            elif command.startswith("abouticaroos"):
-                print("About my other OS:")
-                print("icaroOS is an operating system made with libreoffice impress (for this reason icaroOS is very limited) if you want to use it, download and install libreoffice and download icaroOS HOME EDITION through this link: 'icarogamer2441.github.io/' and the PRO EDITION through this link: icarogamer2441.github.io/pro/' because PRO EDITION is a PRO edition, it is more complete and less full of bugs, but there are some bugs in it, especially in the HOME EDITION")
             elif command.startswith("aboutpythonos"):
                 print("About pythonOS:")
                 print("pythonOS is a simple operating system made in python, it was made for other people to create their own customized operating systems, create what you want and add what you think, be happy customizing this system and if you want, you can post your pythonOS version and any place")
@@ -604,7 +603,7 @@ print("=======================")"""}
                 subprocess.run(f"micro {filename}", shell=True)
             elif command.startswith("secret"):
                 print("DONT USE THIS COMMAND!")
-                randomsss = input("DO YOU WANT TO DHUWIDWUIDHWIUDWTUDGW98SWIYDG? > ")
+                randomsss = input("DO YOU WANT TO DHUWIDWUIDHWIUDWTUDGW98SWIYDG? (y/n) > ")
                 if randomsss.lower() == "y":
                     print("O_O")
                 else:
@@ -645,7 +644,7 @@ print("=======================")"""}
                         elif editmodecmd == "o":
                             self.clear_screen()
                 else:
-                    print("you only can create your own pythonOS version with vim!")
+                    print("you need a code editor!")
                 with open(self.memory_path, "a") as f:
                     f.write("333")
             elif command.startswith("systemicon"):
@@ -706,6 +705,11 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
             elif command.startswith("code"):
                 directory = command.split(" ")[1].strip("\"\'")
                 subprocess.run(f"code {directory}", shell=True)
+            elif command.startswith("aboutme"):
+                msg = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
+                self.aboutme = msg
+            elif command.lower() == "showaboutme":
+                print(self.aboutme)
             else:
                 print(f"Err: command not found. {command}")
 
