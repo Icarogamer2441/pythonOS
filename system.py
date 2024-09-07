@@ -40,24 +40,24 @@ class Kernel:
         memory_path_1 = input("what is the memory file path? (ex: /home/username/Documents/ or C:/username/Documents/) > ")
         self.memory_path = f"{memory_path_1}pythonOSmem.txt"
         self.packages = {"ptop": """print('--> processes occurring:')
-print('Kernel4.2                   # System Kernel')
+print('Kernel4.3                   # System Kernel')
 print('evig                        # System Commands')
 print('Bootloader                  # System bootloader')
 print('pypackage                   # packages system')
 print('--> about processes occurring:')
-print('Kernel4.2                   # is the pythonOS kernel')
+print('Kernel4.3                   # is the pythonOS kernel')
 print('evig                        # all the commands')
 print("Bootloader                  # is the bootloader who loads the kernel that runs while you're running the system")
 print("pypackage                   # pythonOS package manager system")
 print("--> installed packages:")
 for package in self.packages:
     print(package)""",
-        "kernel": """print("Kernel4.2")
+        "kernel": """print("Kernel4.3")
 print("PythonOS kernel")
 print("Kernel loaded by PythonOS Bootloader")""",
         "bootloader": """print("PythonOS bootloader:")
 print("Name: pythonloader")
-print("Running: Kernel4.2")
+print("Running: Kernel4.3")
 print("=======================")
 print("=                     =")
 print("=   ######   #######  =")
@@ -152,7 +152,7 @@ print("=======================")"""}
     def RunOS(self):
         print("+------------------------------+")
         print("|                              |")
-        print("|  pythonOS 4.2 by jose icaro  |")
+        print("|  pythonOS 4.3 by jose icaro  |")
         print("|        made with love        |")
         print("|    98% me and 2% chatgpt     |")
         print("|                              |")
@@ -333,6 +333,7 @@ print("=======================")"""}
                 print("code <path>                                      : open the vscode on the path you put")
                 print("aboutme -s <about-you-msg> -e                    : creates a new pkg to your pythonOS")
                 print("showaboutme                                      : shows the about me message")
+                print("reverse <string>                                  : reverses the given string")
             elif command.startswith("clr"):
                 self.clear_screen()
             elif command.startswith("dl"):
@@ -347,7 +348,7 @@ print("=======================")"""}
                 libs = command.split(" -s ")[1].split(" -e")[0].strip("\"\'")
                 self.install_python_lib(libs)
             elif command.startswith("version"):
-                print("pythonOS by jose icaro. version: 4.2")
+                print("pythonOS by jose icaro. version: 4.3")
             elif command.startswith("uptime"):
                 self.show_uptime()
             elif command.startswith("diskusage"):
@@ -392,7 +393,7 @@ print("=======================")"""}
                             subprocess.run(commands, shell=True)
             elif command.startswith("evig"):
                 print("Evig pythonOS is like Bash from linux. Evig was made to make pythonOS a more realistic OS")
-                print("version: 3.7")
+                print("version: 3.8")
                 print("release type: oficial release")
             elif command.startswith("date"):
                 self.date()
@@ -448,7 +449,7 @@ print("=======================")"""}
                 self.clear_screen()
                 print("+------------------------------+")
                 print("|                              |")
-                print("|  pythonOS 4.2 by jose icaro  |")
+                print("|  pythonOS 4.3 by jose icaro  |")
                 print("|        made with love        |")
                 print("|    98% me and 2% chatgpt     |")
                 print("|                              |")
@@ -627,7 +628,7 @@ print("=======================")"""}
                             print("first, create the pythonOS version file, and edit them, add your commands, remove the commands you want, edit the pythonOS version name, edit the commands (if you want), create a custom version of evig and the version of your pythonOS version, and the final step! publish your pythonOS version (if you want)")
                         elif editmodecmd == "c":
                             versioname = input("what's your pythonOS version name? (dont use spaces) > ")
-                            with open("system.py", "r") as f:
+                            with open(__file__, "r") as f:
                                 with open(versioname + ".py", "w") as files:
                                     files.write(f.read())
                         elif editmodecmd == "e":
@@ -692,7 +693,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
                 package_name = command.split(" ")[1].strip("\"\'")
                 for package_item in self.packages:
                     if package_item == package_name:
-                        exec(self.packages[package_name])
+                        exec(self.packages[package_item])
                         break
             elif command.startswith("pypackage-listinstalled"):
                 for package_name in self.packages:
@@ -701,7 +702,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
                 package_name = command.split(" ")[1].strip("\"\'")
                 for package_item in self.packages:
                     if package_item == package_name:
-                        print(self.packages[package_name])
+                        print(self.packages[package_item])
             elif command.startswith("code"):
                 directory = command.split(" ")[1].strip("\"\'")
                 subprocess.run(f"code {directory}", shell=True)
@@ -710,6 +711,9 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
                 self.aboutme = msg
             elif command.lower() == "showaboutme":
                 print(self.aboutme)
+            elif command.startswith("reverse"):
+                text = command.split(" ")[1].strip("\"\'")
+                print(text[::-1])
             else:
                 print(f"Err: command not found. {command}")
 
